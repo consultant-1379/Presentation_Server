@@ -1,0 +1,30 @@
+dn: uid=administrator,ou=People,dc=vts,dc=com
+uid: administrator
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: top
+objectClass: userTypeOC
+userType: enmUser
+cn: test
+sn: user
+userPassword: operator123
+
+dn: uid=user_with_no_role,ou=People,dc=vts,dc=com
+uid: user_with_no_role
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: top
+objectClass: userTypeOC
+userType: enmUser
+cn: user_with_no_role
+sn: user_with_no_role
+userPassword: user
+
+dn: cn=ADMINISTRATOR,ou=Roles,dc=vts,dc=com
+changetype: modify
+add:uniquemember
+uniquemember: uid=administrator,ou=People,dc=vts,dc=com
+
+

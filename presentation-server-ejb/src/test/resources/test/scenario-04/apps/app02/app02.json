@@ -1,0 +1,29 @@
+{
+  "id": "app02",
+  "path": "/some/path/app02",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "name": "My Application Name",
+  "shortInfo": "My Description",
+  "acronym": "APP02",
+  "version": 1,
+  "resources": [
+    "resource-01",
+    "resource-02"
+  ],
+  "groups": [
+    {
+      "id": "group02"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app02-action-01",
+      "multipleSelection": false,
+      "plugin": "plugins/app02/action01-plugin.js",
+      "category":"Security Management",
+      "order": 3
+    }
+  ]
+}

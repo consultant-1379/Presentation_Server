@@ -1,0 +1,16 @@
+{
+  "id": "Log_Viewer",
+  "path": "/#logviewer",
+  "type": "web",
+  "version": 1,
+  "resources": [
+    "logViewer_access"
+  ],
+  "groups": [
+    {
+      "id": "System",
+      "name": "System"
+    }
+  ]
+}
+

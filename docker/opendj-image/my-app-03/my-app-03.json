@@ -1,0 +1,59 @@
+{
+  "id": "my-app-03",
+  "name": "Sample Application 03",
+  "shortInfo": "Short Info 03",
+  "acronym": "my-app-03",
+  "path": "/some/path/app03",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "groups": [
+    {
+      "id": "group-02",
+      "name": "Group 02"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app03-action-01",
+      "defaultLabel": "[App03] Action 01",
+      "multipleSelection": true,
+      "plugin": "plugins/app03/action01-plugin.js",
+      "category": "Configuration Management",
+      "order": 7000
+    },
+    {
+      "name": "app03-action-02",
+      "defaultLabel": "[App03] Action 02",
+      "multipleSelection": true,
+      "plugin": "plugins/app03/action02-plugin.js",
+      "category": "Configuration Management",
+      "order": 5000
+    },
+    {
+      "name": "app03-action-03",
+      "defaultLabel": "[App03] Action 03",
+      "multipleSelection": false,
+      "plugin": "plugins/app03/action03-plugin.js",
+      "category": "Legacy Actions",
+      "order": 1000
+    },
+    {
+      "name": "app03-action-04",
+      "defaultLabel": "[App03] Action 04",
+      "multipleSelection": false,
+      "plugin": "plugins/app03/action04-plugin.js",
+      "category": "Legacy Actions",
+      "order": 1000
+    }
+  ],
+  "consumeActions": [
+    "app03-action-01",
+    "app03-action-02",
+    "app03-action-03",
+    "app03-action-04",
+    "app01-action-01",
+    "app01-action-02",
+    "app02-action-02"
+  ]
+}

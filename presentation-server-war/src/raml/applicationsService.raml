@@ -1,0 +1,235 @@
+#%RAML 0.8
+
+title: Presentation Server Rest Interface
+baseUri: /rest
+version: v1
+/apps:
+    get:
+        description: |
+            Gets an alphabetically sorted list of the apps available to the current user.
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "acronym": {
+                                            "type": "string"
+                                        },
+                                        "favorite": {
+                                            "type": "string"
+                                        },
+                                        "hidden": {
+                                            "type": "boolean"
+                                        },
+                                        "host": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "externalHost": {
+                                            "type": "string"
+                                        },
+                                        "paramHelp": {
+                                            "type": "string"
+                                        },
+                                        "params": {
+                                            "type": "string"
+                                        },
+                                        "resources": {
+                                            "type": "string"
+                                        },
+                                        "roles": {
+                                            "type": "string"
+                                        },
+                                        "shortInfo": {
+                                            "type": "string"
+                                        },
+                                        "targetUri": {
+                                            "type": "string"
+                                        },
+                                        "uri": {
+                                            "type": "string"
+                                        }
+
+                                    }
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "acronym": "AMOS",
+                                    "favorite": "false",
+                                    "hidden": false,
+                                    "host": "NOT_USED",
+                                    "id": "Advanced_MO_Scripting",
+                                    "name": "Advanced MO Scripting",
+                                    "paramHelp": null,
+                                    "params": null,
+                                    "resources": null,
+                                    "roles": "",
+                                    "shortInfo": "AMOS CLI provides access to a number of services (Alarm, Configuration, File Transfer, Inventory , Log, Notification Services) for the administration of CPP Platform Network Elements.",
+                                    "uri": "/rest/apps/citrix/Advanced_MO_Scripting.ica"
+                                },
+
+                                {
+                                    "acronym": null,
+                                    "favorite": "false",
+                                    "hidden": false,
+                                    "id": "Log_Viewer",
+                                    "name": "Log Viewer",
+                                    "resources": null,
+                                    "roles": "",
+                                    "shortInfo": "Use to query and view details of the platform syslogs, provides a full text search and complex filtering of logs based on syslog data.",
+                                    "targetUri": "https://ieatENM5246-1.athtem.eei.ericsson.se/#logviewer",
+                                    "uri": "/rest/apps/web/Log_Viewer"
+                                }
+                            ]
+            401:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "User not found"
+                                }
+                            ]
+            500:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "Applications not found"
+                                }
+                            ]
+/groups:
+    get:
+        description: |
+            Gets a list of applications available to the current user, sorted by category.
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "apps": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "acronym": {
+                                                        "type": "string"
+                                                    },
+                                                    "favorite": {
+                                                        "type": "string"
+                                                    },
+                                                    "hidden": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "host": {
+                                                        "type": "string"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "paramHelp": {
+                                                        "type": "string"
+                                                    },
+                                                    "params": {
+                                                        "type": "string"
+                                                    },
+                                                    "resources": {
+                                                        "type": "string"
+                                                    },
+                                                    "roles": {
+                                                        "type": "string"
+                                                    },
+                                                    "shortInfo": {
+                                                        "type": "string"
+                                                    },
+                                                    "targetUri": {
+                                                        "type": "string"
+                                                    },
+                                                    "uri": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+            401:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "User not found"
+                                }
+                            ]
+            500:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "Applications not found"
+                                }
+                            ]

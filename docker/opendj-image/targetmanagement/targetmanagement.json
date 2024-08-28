@@ -1,0 +1,17 @@
+{
+  "id": "targetmanagement",
+  "path": "/#targetmanagement",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "target_group_mgmt"
+  ],
+  "groups": [
+    {
+      "id": "Security",
+      "name": "Security"
+    }
+  ]
+}

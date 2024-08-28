@@ -1,0 +1,39 @@
+#%RAML 0.8
+
+title: UI Settings Service Rest Interface
+baseUri: /rest/ui/settings/{version}/
+version: v2
+/{applicationName}/{settingType}:
+    put:
+        description: |
+            Updates/sets setting values for a given application name, setting type and list of setting objects with ID and value.
+        body:
+            application/json:
+                schema: |
+                    {
+                        "$schema": "http://json-schema.org/schema",
+                        "type": "object",
+                        "properties": [
+                            {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    }
+                example: |
+                    [
+                        {
+                            "id": "network_explorer",
+                            "value": "true"
+                        },
+                        {
+                            "id": "networkexplorer_collections",
+                            "value": "true"
+                        }
+                    ]
+        responses:
+            204:

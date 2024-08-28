@@ -1,0 +1,14 @@
+{
+  "id": "alex",
+  "name": null,
+  "type": "web",
+  "path": "/alex",
+  "openInNewWindow": "true",
+  "external": true,
+  "groups": [
+    {
+      "id": "Documentation",
+      "name": "Documentation"
+    }
+  ]
+}

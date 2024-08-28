@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "topologybrowser",
+  "path": "/#topologybrowser",
+  "type": "web",
+  "openInNewWindow": false,
+  "resources": [
+    "persistentobjectservice"
+  ],
+  "groups": [
+    {
+      "id": "Provisioning",
+      "name": "Provisioning"
+    }
+  ]
+}

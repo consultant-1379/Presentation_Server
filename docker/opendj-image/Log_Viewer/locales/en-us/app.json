@@ -1,0 +1,6 @@
+{
+  "title": "Log Viewer",
+  "pageTitle": "Log Viewer",
+  "shortInfo": "Use to query and view details of the platform syslogs, provides a full text search and complex filtering of logs based on syslog data.",
+  "acronym": "LOGV"
+}

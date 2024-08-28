@@ -1,0 +1,5 @@
+{
+  "title": "Software and Hardware Manager",
+  "shortInfo": "Software and Hardware Manager is used to view software, hardware, backup, license inventory of nodes and perform upgrade, backup, restore, install license activities on nodes.",
+  "acronym": "SHM"
+}

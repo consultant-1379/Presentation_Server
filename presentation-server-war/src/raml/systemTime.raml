@@ -1,0 +1,26 @@
+#%RAML 0.8
+title: System Info API
+baseUri: https://server/rest/system
+/time:
+  get:
+    description: Retrieves the current timespamp and time zone from the server
+    responses:
+      200:
+        description: The sever has responded without error
+        body:
+          application/json:
+            example: |
+              {
+                "timestamp": 1490106850372,
+                "utcOffset": 0,
+                "timezone": "UTC",
+                "serverLocation": "UTC"
+              }
+      500:
+        description: An unexpected server error ocurred.
+        body:
+          application/json:
+            example: |
+              {
+                "message": "Detailed error message"
+              }           

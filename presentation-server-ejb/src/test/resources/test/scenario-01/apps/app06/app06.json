@@ -1,0 +1,18 @@
+{
+  "id": "app06",
+  "name": "My Application 06",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-06",
+  "path": "/some/path/app06",
+  "type": "web",
+  "resources": [
+    "resource-06"
+  ],
+  "groups": [
+    {
+      "id": "group06",
+      "name": "Group 06"
+    }
+  ],
+  "consumeActions": []
+}

@@ -1,0 +1,18 @@
+{
+  "id": "app03",
+  "path": "/some/path/app02",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "acronym": "APP03",
+  "version": 1,
+  "resources": [
+    "resource-01",
+    "resource-02"
+  ],
+  "groups": [
+    {
+      "id": "group02"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+
+version: "2.1"
+
+services:
+
+  #Image containing models
+  model-deployment:
+    container_name: ps_model_deployment
+    image: armdocker.rnd.ericsson.se/proj_oss_releases/enm/model-deployment
+    volumes:
+      - /etc/opt/ericsson/ERICmodeldeployment
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /opt/ericsson/docker/model_service/shared/ready ]"]
+      interval: 3s
+      retries: 80
+
+  # Image containing neo4j
+  neo4j:
+    container_name: ps_neo4j
+    image: armdocker.rnd.ericsson.se/proj_oss_releases/enm/neo4j
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+    hostname: neo4j1
+    volumes_from:
+      - neo4j-data-volume
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /opt/ericsson/docker/neo4j/shared/ready ]"]
+      interval: 3s
+      retries: 80
+
+  # Pre populated database volume
+  neo4j-data-volume:
+    container_name: ps_neo4j_data
+    image: armdocker.rnd.ericsson.se/proj_oss_releases/enm/neo4j-prepopulated-data-volume
+    volumes:
+      - /ericsson/neo4j_data/databases/graph.db
+
+  # Image containing PostgreSQL Database Server used by Service Framework
+  postgres:
+    container_name: ps_postgres
+    build: ./docker/postgres
+    hostname: postgresql-server
+#    volumes:
+#      - ./docker/postgres/config:/opt/ericsson/docker/config
+    ports:
+      - 5432:5432
+
+  # Web Console for PostgreSQL
+  # Can be accessed on http://localhost:8180
+  adminer:
+    container_name: ps_adminer
+    image: adminer
+    ports:
+      - 8181:8080
+    links:
+      - postgres:postgresql-server
+
+  # Image containing OpenDJ (LDAP Server) and all openidm policies
+  opendj:
+    container_name: ps_opendj
+    build: ./docker/opendj-image
+    volumes:
+      - ./docker/ldifs:/docker-entrypoint-init.d:ro
+
+  # Apache docker image with mod_cluster enabled
+  apache:
+    container_name: ps_apache
+    build: ./docker/apache-http-enm
+    hostname: apache-host
+    ports:
+      - "6666:6666"
+      - "80:80"
+    volumes:
+      - ./docker/apache-http-enm/config:/opt/ericsson/docker/config/httpd
+
+  # Image containing JBoss AS server
+  jboss:
+    container_name: ps_jboss
+    build: ./docker/jboss-image
+    links:
+      - neo4j:neo4j1
+      - postgres:postgresql-server
+      - opendj:ldap-remote
+      - opendj:ldap-local
+      - apache:apache-host
+    depends_on:
+      - model-deployment
+      - neo4j
+    volumes_from:
+     - neo4j
+     - opendj
+     - model-deployment
+    environment:
+      - JAVA_OPTS=-Xms1g -Xmx2g -Ddps_ignore_mediation=true -Dneo4j.server.hostname=neo4j1 -Dneo4j.serverTransport=bolt -Djackson.deserialization.whitelist.packages=com.ericsson.oss,com.ericsson.nms -javaagent:/opt/jacoco-agent.jar=output=tcpserver,destfile=jacoco-it.exec,address=*,port=6300
+    ports:
+      - "9999:9999" # Those ports are linked to localhost. So you can easily connect using localhost:8080 for example
+      - "9990:9990"
+      - "8080:8080"
+      - "8787:8787"
+      - "6300:6300"
+    volumes:
+      - ./docker/jboss-image/config:/opt/ericsson/docker/config
+      # Used by Application SDK
+      - /home/vagrant/apps:/ericsson/tor/data/apps:rw

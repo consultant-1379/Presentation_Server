@@ -1,0 +1,12 @@
+{
+  "actionName": "app03-action-02",
+  "condition": {
+    "dataType": "Collection",
+    "properties": [
+      {
+        "name": "category",
+        "value": "Public"
+      }
+    ]
+  }
+}

@@ -1,0 +1,270 @@
+openapi: 3.0.2
+info:
+  description: >-
+    This is the API documentation for the endpoints provided by Presentation Server.
+
+    For the full service documentation please [click here](https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/Presentation_Server/latest).
+
+  version: 2.0.1
+  title: Presentation Server UI settings
+  contact:
+    name: Team Mavericks
+    email: PDLTORUIPR@pdl.internal.ericsson.com
+    url: https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/Presentation_Server/latest
+  x-logo:
+    url: "https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/Presentation_Server/latest/images/ericsson_logo.png"
+servers:
+  - url: 'http://{host}:{port}/rest'
+    description: Local docker JBoss
+    variables:
+      host:
+        default: localhost
+      port:
+        default: '80'
+tags:
+  - name: UISettings API (Version 1)
+    description: API to manage UI Settings
+  - name: UISettings API (Version 2)
+    description: API to manage UI Settings
+paths:
+  /ui/settings/v2/{application}/{settingsName}:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    put:
+      tags:
+        - UISettings API (Version 2)
+      summary: Create or amend a UI Settings entry
+      description: >-
+        Creates a new UI Settings entry if none exist.<br>
+        Adds additional settings to the existing UI Settings entry, if at least one exists.<br>
+        Any settings that already exist are not overwritten.
+      parameters:
+        - in: path
+          name: application
+          description: "The name of the application which is setting an entry"
+          required: true
+          schema:
+            type: string
+            example: "Network Explorer"
+        - in: path
+          name: settingsName
+          description: "The name of the settings entry"
+          required: true
+          schema:
+            type: string
+            example: "collectionsTable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsEntry'
+      responses:
+        '204':
+          description: Response given in a successfull request.
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/OverloadProtectionError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /ui/settings/{application}/{settingsName}:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      tags:
+        - UISettings API (Version 1)
+      summary:  Get a settings entry
+      description: >-
+        This endpoint allows the client to get a settings entry.
+      parameters:
+        - in: path
+          name: application
+          description: "The name of the application"
+          required: true
+          schema:
+            type: string
+            example: "Network Explorer"
+        - in: path
+          name: settingsName
+          description: "The name of the entry"
+          required: true
+          schema:
+            type: string
+            example: "collectionsTable"
+      responses:
+        '200':
+          description: Indicates successful settings return
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingsEntry'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/OverloadProtectionError'
+    delete:
+      tags:
+        - UISettings API (Version 1)
+      summary:  Delete a single setting, specified in the request body.
+      description: >-
+        This endpoint allows the client to delete a single setting.
+      parameters:
+        - in: path
+          name: application
+          description: "The name of the application which is deleting a setting"
+          required: true
+          schema:
+            type: string
+            example: "Network Explorer"
+        - in: path
+          name: settingsName
+          description: "The name of the entry which contains a deleted setting"
+          required: true
+          schema:
+            type: string
+            example: "collectionsTable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleSetting'
+      responses:
+        '204':
+          description: Indicates successful deletion (or that such setting did not exist)
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/OverloadProtectionError'
+components:
+  parameters:
+    userId:
+      name: X-Tor-UserId
+      in: header
+      description: User currently authenticated
+      required: true
+      example: administrator
+      schema:
+        type: string
+  responses:
+    Unauthenticated:
+      description: >-
+        Response given when the user header is not provided (no user
+        authenticated)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            internalErrorCode: 10019
+            userMessage:
+              title: Access Forbidden
+              body: No user information was provided!
+    Unauthorized:
+      description: Response given when the user is not allowed to execute the operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            internalErrorCode: 10024
+            userMessage:
+              title: Access Forbidden
+              body: This user does not have access to this feature!
+    ServerError:
+      description: Response given when an unexpected server error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+
+    SettingNotValidated:
+      description: Response returned when the request is invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            userMessage:
+              title: Setting is not valid
+              body: >-
+                Setting value is empty
+
+    DatabaseCurrentlyUnavailable:
+      description: Database is currently being unavailable and the information is not found in cache
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            userMessage:
+              title: Database is unavailable and the setting is not in the cache
+              body: >-
+                The database is unavailable at the moment.
+                If it's happening during the upgrade just wait until the database will be available again.
+                Usually it won't take more than 10 minutes.
+
+    OverloadProtectionError:
+      description: Response returned when server is overloaded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            internalErrorCode: -1
+            userMessage:
+              title: Unable to Retrieve Data
+              body: There is currently no capacity to process the request due to a large amount of activity on the server. Please try again later.
+  schemas:
+    ErrorMessage:
+      type: object
+      description: Payload response given in case of error
+      properties:
+        internalErrorCode:
+          type: integer
+          example: 9999
+          description: Error code provided by the service for this exception scenario
+        userMessage:
+          type: object
+          properties:
+            title:
+              type: string
+              example: Unexpected Error
+              description: A brief title for the exception
+            body:
+              type: string
+              example: >-
+                An unexpected exception was caught in the server. Please check
+                the logs for more information.
+              description: A detailed error message
+
+    SingleSetting:
+      type: object
+      description: Setting entry for a given key
+      properties:
+        id:
+          type: string
+          example: sortOrder
+          description: name for a setting
+        value:
+          type: string
+          example: DESC
+          description: the setting value
+
+    SettingsEntry:
+      type: array
+      description: Settings key-value pair list
+      items:
+        $ref: "#/components/schemas/SingleSetting"
+      example:
+        - id: sortOrder
+          value: ASC
+        - id: rowToSort
+          value: itemName
+        - id: filtersEnabled
+          value: false

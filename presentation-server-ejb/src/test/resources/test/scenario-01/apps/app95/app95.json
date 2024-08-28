@@ -1,0 +1,261 @@
+{
+  "id": "app95",
+  "name": "My Application 95",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-95",
+  "path": "/some/path/app95",
+  "externalHost": "www.sample.com",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "version": 1,
+  "resources": [
+    "resource-95"
+  ],
+  "groups": [
+    {
+      "id": "group95",
+      "name": "Group 95"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app95-action-01",
+      "defaultLabel": "[App95] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-95",
+      "metadata" : [
+        {
+          "name": "url",
+          "value": "https://customlaunchurl1.com"
+        }
+       ]
+    },
+    {
+      "name": "action-metadata-without-value",
+      "defaultLabel": "[App95] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-951",
+      "metadata" : [
+        {
+          "name": "url"
+        }
+       ]
+    },
+    {
+      "name": "action-metadata-without-name",
+      "defaultLabel": "[App95] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-951",
+      "metadata" : [
+        {
+          "value": "https://customlaunchurl1.com"
+        }
+       ]
+    },
+    {
+      "name": "action-metadata-without-name-and-value",
+      "defaultLabel": "[App95] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-951",
+      "metadata" : [
+        {
+        }
+       ]
+    },
+    {
+      "name": "action-with-empty-metadata-values",
+      "defaultLabel": "[App95] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-95",
+      "metadata" : [
+        {
+          "name": "",
+          "value": ""
+        }
+       ]
+    },
+    {
+      "name": "action-with-invalid-metadata",
+      "defaultLabel": "[App95] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-95",
+      "metadata" : [
+        {
+          "name1": "url",
+          "value1": "https://customlaunchurl1.com"
+        }
+       ]
+    },
+    {
+      "name": "action-with-duplicate-metadata",
+      "defaultLabel": "[App95] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-95",
+      "metadata" : [
+        {
+          "name": "url",
+          "value": "https://customlaunchurl1.com"
+        },
+        {
+          "name": "url",
+          "value": "https://customlaunchurl2.com"
+        }
+       ]
+    },
+    {
+      "name": "action-with-multiple-metadata-with-invalid-values",
+      "defaultLabel": "[App95] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-95",
+      "metadata" : [
+        {
+          "name": "url",
+          "value": "https://customlaunchurl1.com"
+        },
+        {
+          "name": "url1"
+        }
+       ]
+    },
+    {
+      "name": "action-metadata-name-and-values-having-length-more-than-256",
+      "defaultLabel": "[App95] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-951",
+      "metadata" : [
+        {
+          "name": "dummy_url_to_test_the_scenario_where_the_metadata_name_property_size_should_not_be_greater_than_256_characters_if_the_property_size_exceeds_256_characters_then_the_particular_action_which_contains_metadata_with_name_of_size_more_than_256_characters_should_be_avoided",
+          "value": "https://confluence-nam.lmera.ericsson.se/download/attachments/224185929/ESM_GAT%20Test%20Report-cloud.ods?version=1&modificationDate=1515563169000&api=v2?09004cff8a6c4ab2?docno=1?15552CXP9031910Uen?newaction=present?docno=1?15552CXP9031910Uen&action=current&format=msw8"
+        }
+       ]
+    },
+    {
+      "name": "action-metadata-name-having-length-more-than-256",
+      "defaultLabel": "[App95] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-951",
+      "metadata" : [
+        {
+          "name": "dummy_url_to_test_the_scenario_where_the_metadata_name_property_size_should_not_be_greater_than_256_characters_if_the_property_size_exceeds_256_characters_then_the_particular_action_which_contains_metadata_with_name_of_size_more_than_256_characters_should_be_avoided",
+          "value": "https://customlaunchurl1.com2"
+        }
+       ]
+    },
+    {
+      "name": "action-metadata-value-having-length-more-than-256",
+      "defaultLabel": "[App95] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-951",
+      "metadata" : [
+        {
+          "name": "url",
+          "value": "https://confluence-nam.lmera.ericsson.se/download/attachments/224185929/ESM_GAT%20Test%20Report-cloud.ods?version=1&modificationDate=1515563169000&api=v2?09004cff8a6c4ab2?docno=1?15552CXP9031910Uen?newaction=present?docno=1?15552CXP9031910Uen&action=current&format=msw8"
+        }
+       ]
+    },
+    {
+      "name": "action-metadata-size-having-more-than-16",
+      "defaultLabel": "[App95] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app95/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-951",
+      "metadata" : [
+        {
+          "name": "url1",
+          "value": "https://customlaunchurl1.com"
+        },
+        {
+          "name": "url2",
+          "value": "https://customlaunchurl2.com"
+        },
+        {
+          "name": "url3",
+          "value": "https://customlaunchurl3.com"
+        },
+        {
+          "name": "url4",
+          "value": "https://customlaunchurl4.com"
+        },
+        {
+          "name": "url5",
+          "value": "https://customlaunchurl5.com"
+        },
+        {
+          "name": "url6",
+          "value": "https://customlaunchurl6.com"
+        },
+        {
+          "name": "url7",
+          "value": "https://customlaunchurl7.com"
+        },
+        {
+          "name": "url8",
+          "value": "https://customlaunchurl8.com"
+        },
+        {
+          "name": "url9",
+          "value": "https://customlaunchurl9.com"
+        },
+        {
+          "name": "url10",
+          "value": "https://customlaunchurl10.com"
+        },
+        {
+          "name": "url11",
+          "value": "https://customlaunchurl11.com"
+        },
+        {
+          "name": "url12",
+          "value": "https://customlaunchurl12.com"
+        },
+        {
+          "name": "url13",
+          "value": "https://customlaunchurl13.com"
+        },
+        {
+          "name": "url14",
+          "value": "https://customlaunchurl14.com"
+        },
+        {
+          "name": "url15",
+          "value": "https://customlaunchurl15.com"
+        },
+        {
+          "name": "url16",
+          "value": "https://customlaunchurl16.com"
+        },
+        {
+          "name": "url17",
+          "value": "https://customlaunchurl17.com"
+        }
+       ]
+    }
+  ],
+  "consumeActions": [
+    "app95-action-01"
+  ]
+}

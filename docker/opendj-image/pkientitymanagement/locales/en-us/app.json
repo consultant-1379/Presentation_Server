@@ -1,0 +1,5 @@
+{
+  "title": "PKI Entity Management",
+  "shortInfo": "PKI Entity Management must allow only authorized users to perform CRUD operations on PKI entities",
+  "acronym": "PKIEM"
+}

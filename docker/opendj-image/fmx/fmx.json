@@ -1,0 +1,20 @@
+{
+  "id": "fmx",
+  "name": "Automatic Alarm Handling",
+  "shortInfo": "Automatic Alarm Handling (FMX) provides a framework for development, instrumentation and management of event processing rules for providing Automatic Event and Incident Management.",
+  "acronym": "FMX",
+  "path": "/#fmx",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "fmxModuleManagement"
+  ],
+  "groups": [
+    {
+      "id": "Monitoring",
+      "name": "Monitoring"
+    }
+  ]
+}

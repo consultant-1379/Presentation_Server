@@ -1,0 +1,17 @@
+{
+  "id": "networkdiscovery",
+  "name": null,
+  "path": "/#discovery",
+  "protocol": "secure",
+  "type": "web",
+  "resources": [
+    "NodeDiscovery"
+  ],
+  "openInNewWindow": false,
+  "groups": [
+    {
+      "id": "Provisioning",
+      "name": "Provisioning"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+#%RAML 0.8
+title: Actions Service API
+baseUri: https://server/app/v1/apps
+/action-matches/:
+  post:
+    description: Retrieve the collection of actions that match the following conditions
+    headers:
+      Accept:
+        default: application/json;version=1.0.0
+        description: Media Type and Version
+    body:
+      application/json:
+        example: |
+          {
+            "application":"networkExplorer",
+            "multipleSelection": false,
+            "conditions": [
+              {
+                "dataType": "ManagedObject",
+                "properties": [
+                  {
+                    "name": "type",
+                    "value": "MeContext"
+                  },
+                  {
+                    "name": "neType",
+                    "value": "ERBS"
+                  }
+                ]
+              },
+              {
+                "dataType": "ManagedObject",
+                "properties": [
+                  {
+                    "name": "type",
+                    "value": "ManagedElement"
+                  },
+                  {
+                    "name": "neType",
+                    "value": "ERBS"
+                  }
+                ]
+              }
+            ]
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "actions": [
+                  {
+                    "defaultLabel": "[App01] Action 01",
+                    "name": "app01-action-01",
+                    "plugin": "plugins/app01/action01-plugin.js",
+                    "applicationId": "my-app-01",
+                    "multipleSelection": false,
+                    "category" : "Configuration Management",
+                    "primary": false,
+                    "icon": "icon-01"
+                  }
+                ],
+                "action-matches": {
+                  "conditions": [
+                    {
+                      "dataType": "ManagedObject",
+                      "properties": [
+                        {
+                          "name": "type",
+                          "value": "MeContext"
+                        },
+                        {
+                          "name": "neType",
+                          "value": "ERBS"
+                        }
+                      ]
+                    },
+                    {
+                      "dataType": "ManagedObject",
+                      "properties": [
+                        {
+                          "name": "type",
+                          "value": "ManagedElement"
+                        },
+                        {
+                          "name": "neType",
+                          "value": "ERBS"
+                        }
+                      ]
+                    }
+                  ],
+                  "application": "my-app-01",
+                  "multipleSelection": false
+                }
+              }

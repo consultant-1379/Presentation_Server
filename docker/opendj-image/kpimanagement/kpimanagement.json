@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "id": "kpimanagement",
+  "path": "/#kpimanagement",
+  "name": null,
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "resources": [
+    "nhm"
+  ],
+  "groups": [
+    {
+      "id": "Performance_and_Optimization",
+      "name": "Performance and Optimization"
+    }
+  ]
+}

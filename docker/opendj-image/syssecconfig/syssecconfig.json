@@ -1,0 +1,18 @@
+{
+  "id": "syssecconfig",
+  "name": null,
+  "path": "#syssecconfig",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "gic_password_policy_mgmt"
+  ],
+  "groups": [
+    {
+      "id": "Security",
+      "name": "Security"
+    }
+  ]
+}

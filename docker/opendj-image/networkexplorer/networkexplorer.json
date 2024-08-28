@@ -1,0 +1,28 @@
+{
+  "version": 5,
+  "id": "networkexplorer",
+  "name": "Network Explorer",
+  "shortInfo": "Use Network Explorer to search and retrieve all Network Configuration Data. The returned data can be grouped into Collections or Saved searches to facilitate sharing and reuse.",
+  "path": "/#networkexplorer",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "resources": [
+    "topologySearchService",
+    "searchExecutor",
+    "topologyCollectionsService",
+    "modelInformationService",
+    "Collections_Public",
+    "Collections_Private",
+    "CollectionsOthers_Public",
+    "CollectionsOthers_Private"
+  ],
+  "groups": [
+    {
+      "id": "Provisioning",
+      "name": "Provisioning"
+    }
+  ],
+  "consumeActions": [],
+  "provideActions": []
+}

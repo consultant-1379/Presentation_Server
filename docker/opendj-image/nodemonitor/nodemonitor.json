@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "id": "nodemonitor",
+  "name": null,
+  "path": "/#nodemonitor",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "resources": [
+    "nhm"
+  ],
+  "groups": [
+    {
+      "id": "Monitoring",
+      "name": "Monitoring"
+    }
+  ]
+}

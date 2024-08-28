@@ -1,0 +1,25 @@
+# Eclipse related files
+.settings
+.classpath
+.project
+
+# InteliJ files #
+worskpace.xml
+.idea/
+*.iml
+
+# Build Folders
+target/
+
+/*.launch
+.DS_Store
+.pmd
+test-output
+*.versionsBackup
+
+*.rpm
+!docker/jboss-image/org.jacoco.agent-0.7.9-runtime.jar
+!docker/jboss-image/config/build/rpms/nexus/rpms.txt
+!docker/jboss-image/config/build/rpms/iso/rpms.txt
+
+build

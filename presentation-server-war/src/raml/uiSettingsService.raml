@@ -1,0 +1,168 @@
+#%RAML 0.8
+
+title: UI Settings Service Rest Interface
+baseUri: /rest/ui/settings
+version: v1
+/{applicationName}/{settingType}:
+    put:
+        description: |
+            Updates/sets the setting value for a given application name, setting type and setting ID. The maximum size of a setting is 5000 characters.
+        body:
+            application/json:
+                schema: |
+                    {
+                        "$schema": "http://json-schema.org/schema",
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                example: |
+                    {
+                        "id": "network_explorer",
+                        "value": "true"
+                    }
+        responses:
+            204:
+
+    get:
+        description: |
+            Gets the settings for a given application name and setting type.
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        example: |
+                            {
+                                "id": "281474976742820",
+                                "value": "true"
+                            }
+            401:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "User not found"
+                                }
+                            ]
+
+            500:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "Applications not found"
+                                }
+                            ]
+
+    delete:
+        description: |
+            Deletes the settings for a given application name and setting type.
+        body:
+            application/json:
+                schema: |
+                    {
+                        "$schema": "http://json-schema.org/schema",
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                example: |
+                    {
+                        "id": "workspace_1483976015902"
+                    }
+        responses:
+            204:
+            401:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "User not found"
+                                }
+                            ]
+            404:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "No Settings Found"
+                                }
+                            ]
+            500:
+                body:
+                    application/json:
+                        schema: |
+                            {
+                                "$schema": "http://json-schema.org/schema",
+                                "type": "array",
+                                "items": {
+                                    "message": "String"
+                                }
+                            }
+                        example: |
+                            [
+                                {
+                                    "message": "Applications not found"
+                                }
+                            ]

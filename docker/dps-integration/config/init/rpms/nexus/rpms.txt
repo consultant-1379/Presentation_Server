@@ -1,0 +1,10 @@
+# Add the RPM names here. The RPM version will be the one delivered the the ISO version used in the container.
+# ------------------------------------------------------------------------------------------------------------
+# Examples:
+#     ERICosstopmodel_CXP9031292
+#     ERICnetworkelementdefmodel_CXP9031290
+#     ERICgeolocationmodel_CXP9031964
+#     ERICsecurityfunctionmodel_CXP9031405
+#     ERICnodesecuritymodel_CXP9030968
+#     ERICsecuritymodel_CXP9030952
+# -----------------------------------------------------------------------------------------------------------

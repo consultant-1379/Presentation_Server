@@ -1,0 +1,55 @@
+#%RAML 0.8
+title: System Info API
+version: "v1"
+baseUri: https://server/rest/system/{version}
+/:
+  get:
+    description: Retrieve the system information
+    responses:
+      200:
+        description: The information of the system
+        body:
+          application/json:
+            example: |
+              {
+                "name" : "enm-host.ericsson.com"
+              }
+/{property}:
+  uriParameters:
+    property:
+      required: true
+      type: string
+      example: name
+      description: The property name to be retrieved
+  get:
+    description: Retrieve the value fo a given system info property
+    responses:
+      200:
+        description: The property with the given name was found and could be retrieved
+        body:
+          application/json:
+            example: |
+              {
+                "name" : "enm-host.ericsson.com"
+              }
+      404:
+        description: There's no property with the given name available
+        body:
+          application/json:
+            example: |
+              {
+                "userMessage": "No Property was found with the given name: aaa",
+                "developerMessage": "No Property was found with the given name: aaa",
+                "httpStatusCode": 404,
+                "internalErrorCode": null,
+                "time": "2017-03-24T14:30:57"
+              }
+
+      500:
+        description: An unexpected server error ocurred.
+        body:
+          application/json:
+            example: |
+              {
+                "message": "Detailed error message"
+              }

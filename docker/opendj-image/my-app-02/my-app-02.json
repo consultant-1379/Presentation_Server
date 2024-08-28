@@ -1,0 +1,55 @@
+{
+  "id": "my-app-02",
+  "name": "Sample Application 02",
+  "shortInfo": "Short Info 02",
+  "acronym": "my-app-02",
+  "path": "/some/path/app02",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "groups": [
+    {
+      "id": "group-01",
+      "name": "Group 01"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app02-action-01",
+      "defaultLabel": "[App02] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app02/action01-plugin.js",
+      "category": "Legacy Actions",
+      "order": 3000,
+      "metadata": [
+        {
+          "name": "url",
+          "value": "https://www.webmail.com"
+        }
+      ]
+    },
+    {
+      "name": "app02-action-02",
+      "defaultLabel": "[App02] Action 02",
+      "multipleSelection": false,
+      "plugin": "plugins/app02/action02-plugin.js",
+      "category": "Collection Actions",
+      "order": 3000
+    },
+    {
+      "name": "app02-action-03",
+      "defaultLabel": "[App02] Action 03",
+      "multipleSelection": false,
+      "plugin": "plugins/app02/action03-plugin.js",
+      "category": "Configuration Management",
+      "order": 6000
+    }
+  ],
+  "consumeActions": [
+    "app02-action-01",
+    "app02-action-02",
+    "app02-action-03",
+    "app01-action-05",
+    "app03-action-01"
+  ]
+}

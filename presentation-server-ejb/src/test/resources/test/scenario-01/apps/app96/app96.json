@@ -1,0 +1,40 @@
+{
+  "id": "app96",
+  "name": "My Application 96",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-96",
+  "path": "/some/path/app96",
+  "externalHost": "www.sample.com",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "version": 1,
+  "resources": [
+    "resource-96"
+  ],
+  "groups": [
+    {
+      "id": "group96",
+      "name": "Group 96"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app96-action-01",
+      "defaultLabel": "[App96] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app96/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-96",
+      "metadata" : [
+         {
+           "name" : "url",
+           "value" : "https://customlaunchurl1.com"
+         }
+       ]
+    }
+  ],
+  "consumeActions": [
+    "app96-action-01"
+  ]
+}

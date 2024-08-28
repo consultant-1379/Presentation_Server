@@ -1,0 +1,17 @@
+{
+  "id": "my-app-01-copy-02",
+  "name": "Sample Application 01",
+  "shortInfo": "Short Info 01",
+  "acronym": "my-app-01-copy-02",
+  "path": "/some/path/app01",
+  "protocol": "secure",
+  "type": "web",
+  "groups": [
+    {
+      "id": "group-01",
+      "name": "Group 01"
+    }
+  ],
+  "provideActions": [],
+  "consumeActions": []
+}

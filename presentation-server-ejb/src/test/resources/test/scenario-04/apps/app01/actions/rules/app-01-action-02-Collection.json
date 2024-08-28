@@ -1,0 +1,6 @@
+{
+  "actionName": "app01-action-02",
+  "condition": {
+    "dataType": "Collection"
+  }
+}

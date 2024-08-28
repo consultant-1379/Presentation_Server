@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Presentation_Server</artifactId>
+        <groupId>com.ericsson.nms.pres</groupId>
+        <version>3.66.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>[Presentation Server] EAR Module</name>
+    <artifactId>presentation-server</artifactId>
+    <packaging>ear</packaging>
+
+    <properties>
+        <version.maven-ear-plugin>2.7</version.maven-ear-plugin>
+        <project.ear.contextRoot>${project.parent.artifactId}</project.ear.contextRoot>
+        <project.war.contextRoot>/rest</project.war.contextRoot>
+        <project.ear.defaultLibBundleDir>lib</project.ear.defaultLibBundleDir>
+        <project.ear.finalName>${project.artifactId}-${project.version}</project.ear.finalName>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <configuration>
+                    <filename>${project.ear.finalName}.ear</filename>
+                    <name>${project.artifactId}.${project.packaging}</name>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>${version.maven-ear-plugin}</version>
+
+                <configuration>
+                    <version>6</version>
+                    <workDirectory>target/${project.artifactId}-${project.version}</workDirectory>
+                    <defaultLibBundleDir>${project.ear.defaultLibBundleDir}</defaultLibBundleDir>
+                    <description>${project.parent.artifactId} JEE6 service</description>
+                    <displayName>${project.parent.artifactId} JEE6 service</displayName>
+
+                    <modules>
+                        <ejbModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>presentation-server-ejb</artifactId>
+                            <bundleFileName>presentation-server-ejb.jar</bundleFileName>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>presentation-server-war</artifactId>
+                            <bundleFileName>presentation-server-war.war</bundleFileName>
+                            <contextRoot>${project.war.contextRoot}</contextRoot>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <skip>true</skip>
+                    <skipDeploy>true</skipDeploy>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>presentation-server-ejb</artifactId>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>presentation-server-war</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-jpa-module-impl</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-data-module-impl</artifactId>
+            <version>${deltaspike.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>service-framework-dist</artifactId>
+            <version>4.6.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

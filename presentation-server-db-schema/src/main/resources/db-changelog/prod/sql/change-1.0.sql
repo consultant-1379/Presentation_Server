@@ -1,0 +1,1 @@
+ALTER database psdb OWNER TO psuser;

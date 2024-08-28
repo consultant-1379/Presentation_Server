@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Presentation_Server</artifactId>
+        <groupId>com.ericsson.nms.pres</groupId>
+        <version>3.66.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>[Presentation Server] EJB Module</name>
+    <artifactId>presentation-server-ejb</artifactId>
+    <packaging>ejb</packaging>
+    <properties>
+        <version.maven-ejb-plugin>2.3</version.maven-ejb-plugin>
+        <!-- Sonar -->
+        <sonar.tests>src/test/groovy</sonar.tests>
+        <sonar.junit.reportPaths>target/failsafe-reports/</sonar.junit.reportPaths>
+    </properties>
+
+    <dependencies>
+
+        <!-- CDI Dependencies -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- EJB API -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <version>1.0.2.Final-redhat-2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Cache -->
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Modeling -->
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.modeling</groupId>
+            <artifactId>modeling-annotation-jar</artifactId>
+            <version>3.1.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>presentation-server-persistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>presentation-server-db-schema</artifactId>
+        </dependency>
+
+        <!-- API Dependency -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>presentation-server-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>presentation-server-jar</artifactId>
+        </dependency>
+
+        <!-- Service Framework -->
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>sdk-config-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>sdk-cache-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>sdk-security-accesscontrol-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>sdk-core-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>sdk-recording-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>sdk-context-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.sdk</groupId>
+            <artifactId>sdk-instrumentation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Model dependencies -->
+        <!--Maven artifact exclusions (transitive dependency) TORF-581873 (CVE-2021-26291)-->
+        <dependency>
+            <groupId>com.ericsson.oss.models.presentationServer</groupId>
+            <artifactId>presentationServerModels-jar</artifactId>
+            <version>${version.presentationServer.models}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.sonatype.sisu</groupId>
+                    <artifactId>sisu-guava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.ericsson.oss.itpf.modeling.tools</groupId>
+                    <artifactId>modeling-annotation-processor-jar</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.ericsson.oss.itpf.modeling.tools</groupId>
+                    <artifactId>model-processing-jar</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <!-- Commons Lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- Groovy -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spock and CDI Support tests -->
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.athaydes</groupId>
+            <artifactId>spock-reports</artifactId>
+            <scope>test</scope>
+            <!-- this avoids affecting your version of Groovy/Spock -->
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.cds</groupId>
+            <artifactId>cdi-test-support</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.spec.javax.interceptor</groupId>
+                    <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Postgres to check SQL status codes -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.interceptor</groupId>
+            <artifactId>javax.interceptor-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>${version.maven-ejb-plugin}</version>
+                <configuration>
+                    <ejbVersion>3.0</ejbVersion>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <skip>true</skip>
+                    <skipDeploy>true</skipDeploy>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <!--
+                       Ignores dependencies used by Groovy Tests as they can't be identified by the plugin
+                       DO NOT update this list without previous agreement.
+                     -->
+                    <ignoredDependencies>
+                        <ignoredDependency>com.ericsson.cds:cdi-test-support:jar:*</ignoredDependency>
+                        <ignoredDependency>org.objenesis:objenesis:jar:*</ignoredDependency>
+                        <ignoredDependency>com.athaydes:spock-reports:*</ignoredDependency>
+                        <ignoredDependency>org.codehaus.groovy:groovy-all:jar:*</ignoredDependency>
+                        <ignoredDependency>org.spockframework:spock-core:jar:*</ignoredDependency>
+                        <ignoredDependency>cglib:cglib-nodep:jar:*</ignoredDependency>
+                        <ignoredDependency>com.ericsson.oss.models.presentationServer:presentationServerModels-jar:*</ignoredDependency>
+                        <ignoredDependency>com.ericsson.oss.models.presentationServer:presentationServerModels-model:*</ignoredDependency>
+                        <ignoredDependency>org.hamcrest:hamcrest-all:jar:*</ignoredDependency>
+                    </ignoredDependencies>
+                </configuration>
+            </plugin>
+
+            <!-- Enable Groovy Compiler -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <compilerId>groovy-eclipse-compiler</compilerId>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>2.9.2-01</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>2.4.3-01</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-eclipse-compiler</artifactId>
+                <version>2.9.2-01</version>
+                <extensions>true</extensions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${consolidated.jacoco.path}</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${consolidated.jacoco.path}</dataFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- Profile used to activate/deactivate unit tests. This is active by default -->
+        <profile>
+            <id>unit</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <build>
+                <plugins>
+                    <!-- Enable Surefire to use Spock Tests -->
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.0</version>
+                        <configuration>
+                            <skip>false</skip>
+                            <useSystemClassLoader>true</useSystemClassLoader>
+                            <useManifestOnlyJar>false</useManifestOnlyJar>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/*Spec.java</include>
+                                <include>**/*Test.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--
+            This profile is used to enable/disable the persistence feature in Presentation Server.
+            If the profile is enabled the persistence.xml file will be added to the EJB enabling persistence·
+            If it's disabled the file will not be added causing the persistence context to never be initialized.
+
+            This will be used as an option to deliver/test persistence code while the database is still being created in production.
+            Our pre-code-review job should have this profile enabled and the release job not.
+        -->
+        <profile>
+            <id>persistence</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>copy-persistence-xml</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.outputDirectory}/META-INF</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/descriptors/persistence</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

@@ -1,0 +1,4 @@
+DO $$
+BEGIN
+    GRANT CONNECT ON DATABASE "psdb" TO psuser;
+END$$;

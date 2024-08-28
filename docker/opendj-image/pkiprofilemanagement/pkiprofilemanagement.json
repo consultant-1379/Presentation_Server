@@ -1,0 +1,18 @@
+{
+  "id": "pkiprofilemanagement",
+  "name": null,
+  "path": "#pkiprofilemanagement",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "read_profiles"
+  ],
+  "groups": [
+    {
+      "id": "Security",
+      "name": "Security"
+    }
+  ]
+}

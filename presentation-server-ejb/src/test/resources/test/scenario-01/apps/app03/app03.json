@@ -1,0 +1,79 @@
+{
+  "id": "app03",
+  "name": "My Application 03",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-03",
+  "path": "/some/path/app03",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "version": 2,
+  "resources": [
+    "resource-02",
+    "resource-03",
+    "resource-04"
+  ],
+  "groups": [
+    {
+      "id": "group01",
+      "name": "Group 01"
+    },
+    {
+      "id": "group02",
+      "name": "Group 02"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app03-action-01",
+      "defaultLabel": "[App03] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app03/action01-plugin.js",
+      "category":"Performance Management"
+    },
+    {
+      "name": "app03-action-02",
+      "defaultLabel": "[App03] Action 02",
+      "multipleSelection": true,
+      "plugin": "plugins/app03/action02-plugin.js",
+      "category":"Performance Management"
+    },
+    {
+      "name": "action-without-category",
+      "defaultLabel": "Action without category",
+      "multipleSelection": false,
+      "plugin": "any-plugin",
+      "order": 3
+    },
+    {
+      "defaultLabel": "Action without name",
+      "multipleSelection": false,
+      "plugin": "any-plugin",
+      "category":"Performance Management",
+      "order": 4
+    },
+    {
+      "name": "action-without-plugin",
+      "defaultLabel": "Action without plugin",
+      "multipleSelection": false,
+      "category":"Performance Management",
+      "order": 5
+    },
+    {
+      "name": "action-without-label",
+      "multipleSelection": false,
+      "plugin": "any-plugin",
+      "category":"Performance Management",
+      "order": 6
+    },
+    {
+      "name": "action-with-invalid-category",
+      "defaultLabel": "Action with invalid category",
+      "multipleSelection": false,
+      "plugin": "any-plugin",
+      "category":"invalid-category",
+      "order": 7
+    }
+  ],
+  "consumeActions": ["app01-action-01","app02-action-01", "app03-action-02"]
+}

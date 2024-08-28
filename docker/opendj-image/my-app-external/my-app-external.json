@@ -1,0 +1,17 @@
+{
+  "id": "my-app-external",
+  "name": "Sample Application External (Google Maps)",
+  "shortInfo": "Short Info External",
+  "path": "/maps",
+  "external": true,
+  "externalHost": "www.google.ie",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "groups": [
+    {
+      "id": "group-01",
+      "name": "Group 01"
+    }
+  ]
+}

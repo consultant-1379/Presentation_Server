@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Presentation Server Docs">
+    <bannerLeft>
+        <name>Presentation Server</name>
+    </bannerLeft>
+    <publishDate position="right"/>
+    <bannerRight>
+        <src>ericsson_logo.png</src>
+    </bannerRight>
+    <body>
+        <head>
+            <![CDATA[<script type="text/javascript">$(document).ready(function(){$("div.source pre").addClass("prettyprint");prettyPrint()});</script>]]>
+        </head>
+        <links>
+            <!-- header links specific to the documentation -->
+            <item name="Ericsson" href="http://www.ericsson.com/"/>
+        </links>
+        <menu name="API Documentation">
+            <item name="Applications Service REST API" href="application-service-api.html"/>
+            <item name="UI Settings Service REST API" href="uisettings-service-api.html"/>
+            <item name="Action Service REST API (v1)" href="action-service-v1-api.html"/>
+            <item name="System Time Service REST API" href="system-time-api.html"/>
+            <item name="System Info Service REST API (v1)" href="system-info-v1-api.html"/>
+        </menu>
+        <menu name="Guides">
+            <item name="How to add or update applications on Launcher" href="addAppToLauncher.html"/>
+            <item name="How to add or update actions provided by my application" href="how-to-add-actions.html"/>
+            <item name="Actions ordering" href="actions-ordering.html" />
+            <item name="How to add or update actions that should be consumed by my application" href="how-to-consume-actions.html"/>
+            <item name="How to translate your applications in Launcher" href="localization-howto.html" />
+            <item name="Installing your metadata files" href="installing-metadata-files.html" />
+            <item name="UI Settings documentation" href="ui-settings.html" />
+        </menu>
+        <menu name="FAQ">
+            <item name="Application Metadata" href="app-metadata-faq.html"/>
+            <item name="Actions Service" href="action-service-faq.html"/>
+            <item name="System Info" href="system-info-faq.html"/>
+            <item name="Localization" href="localization-faq.html"/>
+        </menu>
+        <menu name="Examples">
+            <item name="Network Explorer Application Metadata" href="network-explorer-example.html"/>
+            <item name="Application providing and consuming actions" href="app-actions-example.html"/>
+            <item name="Action rules definition" href="action-rule-example.html"/>
+        </menu>
+    </body>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.6</version>
+    </skin>
+</project>

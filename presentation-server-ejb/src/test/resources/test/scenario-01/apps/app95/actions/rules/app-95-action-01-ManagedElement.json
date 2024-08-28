@@ -1,0 +1,6 @@
+{
+  "actionName": "app95-action-01",
+  "condition": {
+    "dataType": "SGSN"
+  },
+}

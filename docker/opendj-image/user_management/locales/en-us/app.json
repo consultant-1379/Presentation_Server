@@ -1,0 +1,5 @@
+{
+  "title": "User Management",
+  "acronym": "UM",
+  "shortInfo": "User Management allows a Security Administrator to create and delete users, assign users with roles and manage password functions. The mapping of roles, target groups and users is also performed in this application."
+}

@@ -1,0 +1,25 @@
+{
+  "id": "networkviewer",
+  "name": null,
+  "path": "#networkviewer",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "networkviewer"
+  ],
+  "groups": [
+    {
+      "id": "Monitoring",
+      "name": "Monitoring"
+    }
+  ],
+  "consumeActions": [
+    "deletenode",
+    "topologybrowser-locate-in-topology",
+    "alarmmonitor-remote-show",
+    "elementmanager-remote-show",
+    "nodecli-remote-show"
+  ]
+}

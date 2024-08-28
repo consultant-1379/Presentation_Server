@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <deployment>
+        <!--
+            Workaround necessary due to a bug on JBoss EAP 6.4.X
+            The fix is scheduled to 6.4.9 CP release
+            https://access.redhat.com/solutions/2218051
+        -->
+        <exclusions>
+            <module name="org.hibernate" />
+        </exclusions>
+        <dependencies>
+            <module name="org.hibernate" />
+            <module name="org.slf4j" />
+        </dependencies>
+    </deployment>
+
+    <sub-deployment name="presentation-server-ejb.jar">
+        <exclusions>
+            <module name="org.hibernate" />
+        </exclusions>
+        <dependencies>
+            <module name="org.hibernate" />
+            <module name="org.hibernate.validator" />
+        </dependencies>
+    </sub-deployment>
+
+    <sub-deployment name="presentation-server-war.war">
+        <dependencies>
+            <module name="org.jboss.resteasy.resteasy-jettison-provider" />
+        </dependencies>
+    </sub-deployment>
+
+</jboss-deployment-structure>

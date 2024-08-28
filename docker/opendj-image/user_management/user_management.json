@@ -1,0 +1,17 @@
+{
+  "id": "user_management",
+  "path": "/#usermanagement",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "user_mgmt"
+  ],
+  "groups": [
+    {
+      "id": "Security",
+      "name": "Security"
+    }
+  ]
+}

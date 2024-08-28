@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "id": "networkhealthmonitor",
+  "name": "Network Health Monitor",
+  "path": "/#networkhealthmonitor",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "resources": [
+    "nhm"
+  ],
+  "groups": [
+    {
+      "id": "Monitoring",
+      "name": "Monitoring"
+    }
+  ],
+  "consumeActions": [
+    "nodemonitor-view-node",
+    "alarmmonitor-remote-show",
+    "topologybrowser-locate-in-topology",
+    "topologybrowser-initiate-cm-sync",
+    "cellmanagement-view-cells",
+    "elementmanager-remote-show",
+    "advancedmoscripting-remote-show",
+    "cabinetviewer-remote-show",
+    "nodecli-remote-show",
+    "shmnoderestartjob-restart-node",
+    "winfiolcli-remote-show",
+    "winfiolgui-remote-show",
+    "emcli-remote-show",
+    "emgui-remote-show",
+    "nmtoolbox-remote-show",
+    "nwiecli-remote-show",
+    "incidentmanagement-view-incidents"
+  ]
+}

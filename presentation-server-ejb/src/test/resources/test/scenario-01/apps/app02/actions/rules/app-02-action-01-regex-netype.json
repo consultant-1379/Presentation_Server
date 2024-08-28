@@ -1,0 +1,16 @@
+{
+  "actionName": "app02-action-01",
+  "condition": {
+    "dataType": "ManagedObject",
+    "properties": [
+      {
+        "name": "moType",
+        "value": "MeContext"
+      },
+      {
+        "name": "neType",
+        "value": "re:^((?!A)(?!RNC)(?!SGSN).|A2)*$"
+      }
+    ]
+  }
+}

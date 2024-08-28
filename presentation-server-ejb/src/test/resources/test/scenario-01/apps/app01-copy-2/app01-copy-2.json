@@ -1,0 +1,24 @@
+{
+  "id": "app01-copy-2",
+  "name": "My Application 01",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-01-copy-2",
+  "path": "/some/path/app01",
+  "externalHost": "www.sample.com",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "invalid-attr": 0,
+  "resources": [
+    "resource-01",
+    "resource-02"
+  ],
+  "groups": [
+    {
+      "id": "group01",
+      "name": "Group 01"
+    }
+  ],
+  "provideActions": [],
+  "consumeActions": []
+}

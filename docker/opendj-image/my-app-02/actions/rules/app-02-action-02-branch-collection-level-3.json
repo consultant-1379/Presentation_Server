@@ -1,0 +1,16 @@
+{
+  "actionName": "app02-action-02",
+  "condition": {
+    "dataType": "Collection",
+    "properties": [
+      {
+        "name": "type",
+        "value": "BRANCH"
+      },
+      {
+        "name": "level",
+        "value": 3
+      }
+    ]
+  }
+}

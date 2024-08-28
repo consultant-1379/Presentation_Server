@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "pmic",
+  "path": "/#pmiclistsubscription",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "openInNewWindow": false,
+  "resources": [
+    "subscription"
+  ],
+  "groups": [
+    {
+      "id": "Performance_and_Optimization",
+      "name": "Performance and Optimization"
+    }
+  ],
+  "consumeActions": []
+}

@@ -1,0 +1,36 @@
+{
+  "id": "app05",
+  "name": "My Application 05",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-03",
+  "path": "/some/path/app03",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "version": 2,
+  "resources": [
+    "resource-02"
+  ],
+  "groups": [
+    {
+      "id": "group01",
+      "name": "Group 01"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app05-action-01",
+      "defaultLabel": "[App05] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app05/action01-plugin.js",
+      "category":"Performance Management",
+      "resources": [
+        {
+          "name":  "resource-01",
+          "action": "READ"
+        }
+      ]
+    }
+  ],
+  "consumeActions": ["app05-action-01"]
+}

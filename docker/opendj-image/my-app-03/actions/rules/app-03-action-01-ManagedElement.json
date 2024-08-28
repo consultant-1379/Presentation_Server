@@ -1,0 +1,6 @@
+{
+  "actionName": "app03-action-01",
+  "condition": {
+    "dataType": "ManagedObject"
+  }
+}

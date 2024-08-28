@@ -1,0 +1,53 @@
+{
+  "id": "app02",
+  "name": "My Application 02",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-02",
+  "path": "/some/path/app02",
+  "protocol": "unsecure",
+  "port": 80,
+  "type": "web",
+  "resources": [
+    "resource-01",
+    "resource-03"
+  ],
+  "groups": [
+    {
+      "id": "group02",
+      "name": "Group 02"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app02-action-01",
+      "defaultLabel": "[App02] Action 01",
+      "multipleSelection": true,
+      "plugin": "plugins/app02/action01-plugin.js",
+      "category":"Performance Management",
+      "primary": true,
+      "icon": "icon-02",
+      "order": 5
+    },
+    {
+      "name": "two-actions-with-same-order-01",
+      "defaultLabel": "any",
+      "multipleSelection": true,
+      "plugin": "any",
+      "category":"Performance Management",
+      "primary": true,
+      "order": 10
+    },
+    {
+      "name": "two-actions-with-same-order-02",
+      "defaultLabel": "any",
+      "multipleSelection": true,
+      "plugin": "any",
+      "category":"Performance Management",
+      "primary": true,
+      "order": 10
+    }
+  ],
+  "consumeActions": [
+    "app02-action-01"
+  ]
+}

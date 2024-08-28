@@ -1,0 +1,25 @@
+{
+  "id": "command_line_interface",
+  "name": null,
+  "path": "/#cliapp",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "cm_editor",
+    "cm_config",
+    "bulk_import",
+    "lcm",
+    "ap",
+    "cppinventorysynch_service",
+    "credm",
+    "open_alarms",
+    "nbi_fm_snmp_subscribe"
+  ],
+  "groups": [
+    {
+      "id": "Provisioning",
+      "name": "Provisioning"
+    }
+  ]
+}

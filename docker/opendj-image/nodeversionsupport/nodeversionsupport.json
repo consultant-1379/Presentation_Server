@@ -1,0 +1,16 @@
+{
+  "id": "nodeversionsupport",
+  "name": null,
+  "path": "/#nodeversionsupport",
+  "type": "web",
+  "version": 1,
+  "resources": [
+    "node_version_support"
+  ],
+  "groups": [
+    {
+      "id": "Provisioning",
+      "name": "Provisioning"
+    }
+  ]
+}

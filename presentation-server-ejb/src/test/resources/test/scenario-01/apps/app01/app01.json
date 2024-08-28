@@ -1,0 +1,38 @@
+{
+  "id": "app01",
+  "name": "My Application 01",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-01",
+  "path": "/some/path/app01",
+  "externalHost": "www.sample.com",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "version": 2,
+  "invalid-attr": 0,
+  "resources": [
+    "resource-01",
+    "resource-02"
+  ],
+  "groups": [
+    {
+      "id": "group01",
+      "name": "Group 01"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app01-action-01",
+      "defaultLabel": "[App01] Action 01",
+      "multipleSelection": false,
+      "plugin": "plugins/app01/action01-plugin.js",
+      "category":"Security Management",
+      "icon": "icon-01",
+      "invalid-attr": 0
+    }
+  ],
+  "consumeActions": [
+    "app01-action-01",
+    "app02-action-01"
+  ]
+}

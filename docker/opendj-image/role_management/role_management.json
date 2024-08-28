@@ -1,0 +1,17 @@
+{
+  "id": "role_management",
+  "path": "/#rolemanagement",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "role_mgmt"
+  ],
+  "groups": [
+    {
+      "id": "Security",
+      "name": "Security"
+    }
+  ]
+}

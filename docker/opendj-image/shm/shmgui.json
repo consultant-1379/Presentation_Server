@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "id": "shm",
+  "name": null,
+  "path": "/#shm",
+  "type": "web",
+  "openInNewWindow": false,
+  "resources": [
+    "cppinventorysynch_service"
+  ],
+  "groups": [
+    {
+      "id": "Provisioning",
+      "name": "Provisioning"
+    }
+  ]
+}

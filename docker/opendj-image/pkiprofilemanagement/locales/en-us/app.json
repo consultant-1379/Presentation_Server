@@ -1,0 +1,5 @@
+{
+  "title": "PKI Profile Management",
+  "shortInfo": "PKI Profile Management must allow only authorized users to perform CRUD operations on PKI profiles",
+  "acronym": "PKIPM"
+}

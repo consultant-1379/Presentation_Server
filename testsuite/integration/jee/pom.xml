@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Presentation_Server-testsuite-integration</artifactId>
+        <groupId>com.ericsson.nms.pres</groupId>
+        <version>3.66.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>[Presentation Server] Testsuite Integration JEE</name>
+    <artifactId>Presentation_Server-testsuite-integration-jee</artifactId>
+    <properties>
+        <execMavenPluginVer>1.2.1</execMavenPluginVer>
+        <skip.accesscontrol.config>false</skip.accesscontrol.config>
+        <maven.test.skip>true</maven.test.skip>
+
+        <root.dir>${project.basedir}/../../../</root.dir>
+        <consolidated.jacoco.path>${root.dir}/target/jacoco.exec</consolidated.jacoco.path>
+
+        <!-- Sonar -->
+        <sonar.tests>src/test/groovy</sonar.tests>
+        <sonar.junit.reportPaths>target/failsafe-reports/</sonar.junit.reportPaths>
+    </properties>
+
+    <dependencies>
+
+        <!-- API / Common Jar Dependency -->
+        <dependency>
+            <groupId>com.ericsson.nms.pres</groupId>
+            <artifactId>presentation-server-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.nms.pres</groupId>
+            <artifactId>presentation-server-jar</artifactId>
+        </dependency>
+
+        <!-- Java EE 6 -->
+        <dependency>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <version>1.0.0.Final</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>2.7.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>${version.spock}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>3.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>2.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${version.groovy}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <!--
+            This profile is used to run the integration tests on a Docker Image.
+            For this profile we assume:
+              * That you already have all required images running on your environment (using the the docker-compose.yml file)
+              * All JBoss ports are mapped to your localhost
+        -->
+        <profile>
+            <id>docker</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+            <dependencies>
+                <!-- Deployments -->
+                <dependency>
+                    <groupId>com.ericsson.nms.pres</groupId>
+                    <artifactId>presentation-server</artifactId>
+                    <type>ear</type>
+                    <scope>test</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.ericsson.oss.models.presentationServer</groupId>
+                            <artifactId>presentationServerModels-jar</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+
+                    <!--
+                        Uses Jacoco plugin to collect the exec data generated in the server after the test execution
+                    -->
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>pull-test-data</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>dump</goal>
+                                </goals>
+                                <configuration>
+                                    <destFile>${consolidated.jacoco.path}</destFile>
+                                    <address>${jboss.http.address}</address>
+                                    <port>${jacoco.remote.port}</port>
+                                    <reset>false</reset>
+                                    <append>true</append>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <append>true</append>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.19</version>
+                        <configuration>
+                            <failIfNoTests>false</failIfNoTests>
+                            <useSystemClassLoader>true</useSystemClassLoader>
+                            <useManifestOnlyJar>false</useManifestOnlyJar>
+                            <useFile>false</useFile>
+                            <includes>
+                                <include>**/*Spec.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <jboss.http.address>${jboss.http.address}</jboss.http.address>
+                                <jboss.http.port>${jboss.http.port}</jboss.http.port>
+                                <jboss.management.address>${jboss.management.address}</jboss.management.address>
+                                <jboss.management.port>${jboss.management.port}</jboss.management.port>
+                                <jboss.username>${jboss.username}</jboss.username>
+                                <jboss.password>${jboss.password}</jboss.password>
+                            </systemPropertyVariables>
+                            <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>verify</id>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+    <build>
+        <plugins>
+            <!-- Enable Groovy Compiler -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <compilerId>groovy-eclipse-compiler</compilerId>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>2.9.2-01</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>2.4.3-01</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-eclipse-compiler</artifactId>
+                <version>2.9.2-01</version>
+                <extensions>true</extensions>
+            </plugin>
+
+            <!--
+                For Sonar to be able to link the execution file to the source code, the execution file needs to be in the
+                target folder of the module where the source code is.
+
+                As we only have one "consolidated" exec file, this plugin is copying the same file to all target folders
+                of modules that have any source
+            -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <!-- Copy the jacoco exec file to presentation-server-api module -->
+                    <execution>
+                        <id>copy-jacoco-exec-object-configurator</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${root.dir}/presentation-server-api/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${root.dir}/target</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Copy the jacoco exec file to presentation-server-jar module -->
+                    <execution>
+                        <id>copy-jacoco-exec-api</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${root.dir}/presentation-server-jar/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${root.dir}/target</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Copy the jacoco exec file to presentation-server-ejb module -->
+                    <execution>
+                        <id>copy-jacoco-exec-ejb</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${root.dir}/presentation-server-ejb/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${root.dir}/target</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Copy the jacoco exec file to presentation-server-war module -->
+                    <execution>
+                        <id>copy-jacoco-exec-jar</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${root.dir}/presentation-server-war/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${root.dir}/target</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Copy the jacoco exec file to presentation-server-persistence module -->
+                    <execution>
+                        <id>copy-jacoco-exec-entities</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${root.dir}/presentation-server-persistence/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${root.dir}/target</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Copy the jacoco exec file to presentation-server-db-schema module -->
+                    <execution>
+                        <id>copy-jacoco-exec-db-schema</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${root.dir}/presentation-server-db-schema/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${root.dir}/target</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

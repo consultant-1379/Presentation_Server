@@ -1,0 +1,5 @@
+{
+  "title": "Release Independence Manager",
+  "shortInfo": "Release Independence Manager application enables ENM to support any new NE version, without requiring an ENM upgrade.",
+  "acronym": "RI"
+}

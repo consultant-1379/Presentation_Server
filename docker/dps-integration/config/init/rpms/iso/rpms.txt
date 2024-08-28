@@ -1,0 +1,9 @@
+# Add the RPM GAV and they will be picked from nexus repository.
+# The GAV names can be partial. If no version is provided, the latest will be used.
+# ------------------------------------------------------------------------------------------------------------
+# Examples:
+#     com/ericsson/oss/services/test:ERICservicehelper_CXP0000000
+#     ERICsharedserviceshelper_CXP0000000:1.30.4
+#     ERICneconnmepstub_CXP0000000
+#     com/ericsson/oss/mediation:ERICmediationrouter_CXP9031423:2.10.7
+# -----------------------------------------------------------------------------------------------------------

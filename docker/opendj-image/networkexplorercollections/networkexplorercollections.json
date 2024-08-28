@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "id": "networkexplorercollections",
+  "name": "Collection Management",
+  "shortInfo": "Use Collection Management to display the Collections that user is allowed to view, to delete Collections, and create or modify them from a file.",
+  "path": "/#networkexplorer/collections",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "resources": [
+    "topologyCollectionsService",
+    "Collections_Public",
+    "Collections_Private",
+    "CollectionsOthers_Public",
+    "CollectionsOthers_Private"
+  ],
+  "groups": [
+    {
+      "id": "Provisioning",
+      "name": "Provisioning"
+    }
+  ]
+}

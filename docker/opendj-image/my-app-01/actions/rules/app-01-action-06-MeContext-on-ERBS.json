@@ -1,0 +1,16 @@
+{
+  "actionName": "app01-action-06",
+  "condition": {
+    "dataType": "ManagedObject",
+    "properties": [
+      {
+        "name": "moType",
+        "value": "MeContext"
+      },
+      {
+        "name": "targetType",
+        "value": "ERBS"
+      }
+    ]
+  }
+}

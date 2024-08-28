@@ -1,0 +1,44 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="presentation-server-pu" transaction-type="JTA">
+
+        <class>com.ericsson.nms.presentation.service.persistence.entities.v1.configuration.ConfigurationEntity</class>
+        <class>com.ericsson.nms.presentation.service.persistence.entities.v1.instrumentation.RelationEntity</class>
+        <class>com.ericsson.nms.presentation.service.persistence.entities.v1.ui_settings.UiSettingGroupEntity</class>
+        <class>com.ericsson.nms.presentation.service.persistence.entities.v1.ui_settings.UiSettingEntity</class>
+
+        <!-- Define Hibernate as default provider -->
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <!-- Defines the data source to be used -->
+        <jta-data-source>java:jboss/datasources/presentation-ds</jta-data-source>
+
+        <!-- Disables any entity not listed -->
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <!-- Enables Second Level cache only on entities annotated with @Cacheable -->
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
+        <properties>
+            <!-- Use PostgreSQL for query dialect -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>
+
+            <!-- Define the database timeouts -->
+            <property name="javax.persistence.lock.timeout" value="5000"/>
+            <property name="javax.persistence.query.timeout" value="5000"/>
+
+            <!-- Second Level cache configuration -->
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.use_query_cache" value="true"/>
+            <property name="hibernate.cache.region.factory_class"
+                      value="jcache"/>
+            <property name="javax.persistence.validation.mode" value="NONE" />
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

@@ -1,0 +1,21 @@
+{
+  "id": "app04",
+  "name": "My Application 04",
+  "shortInfo": "Brief description...",
+  "acronym": "MYAPP-04",
+  "path": "/some/path/app04",
+  "type": "citrix",
+  "resources": [
+    "resource-01"
+  ],
+  "groups": [
+    {
+      "id": "group03",
+      "name": "Group 03"
+    },
+    {
+      "id": "group04",
+      "name": "Group 04"
+    }
+  ]
+}

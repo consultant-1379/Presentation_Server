@@ -1,0 +1,19 @@
+{
+  "id": "pkientitymanagement",
+  "name": null,
+  "path": "#pkientitymanagement",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "read_caEntities",
+    "read_entities"
+  ],
+  "groups": [
+    {
+      "id": "Security",
+      "name": "Security"
+    }
+  ]
+}

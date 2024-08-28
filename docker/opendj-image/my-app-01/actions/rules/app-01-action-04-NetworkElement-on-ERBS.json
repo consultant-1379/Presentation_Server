@@ -1,0 +1,16 @@
+{
+  "actionName": "app01-action-04",
+  "condition": {
+    "dataType": "ManagedObject",
+    "properties": [
+      {
+        "name": "moType",
+        "value": "NetworkElement"
+      },
+      {
+        "name": "targetType",
+        "value": "ERBS"
+      }
+    ]
+  }
+}

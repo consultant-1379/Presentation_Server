@@ -1,0 +1,38 @@
+{
+  "id": "app01",
+  "path": "/some/path/app01",
+  "protocol": "secure",
+  "port": 443,
+  "type": "web",
+  "version": 1,
+  "resources": [
+    "resource-01",
+    "resource-02"
+  ],
+  "groups": [
+    {
+      "id": "group01"
+    }
+  ],
+  "provideActions": [
+    {
+      "name": "app01-action-01",
+      "multipleSelection": false,
+      "plugin": "plugins/app01/action01-plugin.js",
+      "category":"Security Management",
+      "order": 1
+    },
+    {
+      "name": "app01-action-02",
+      "multipleSelection": false,
+      "plugin": "plugins/app01/action02-plugin.js",
+      "category":"Security Management",
+      "defaultLabel": "Unmodified Action Name",
+      "order": 2
+    }
+  ],
+  "consumeActions": [
+    "app01-action-01",
+    "app01-action-02"
+  ]
+}

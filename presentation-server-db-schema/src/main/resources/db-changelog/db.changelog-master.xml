@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <preConditions onFailMessage="Preconditions failed - user 'psuser' is required">
+        <runningAs username="psuser" />
+    </preConditions>
+
+    <!-- Creates credentials for test environment -->
+    <include file="test/db.changelog-1.0.xml" relativeToChangelogFile="true" />
+
+    <!--
+        Any changelog file in the test folder will be executed only with test context enabled.
+        These changelogs are used only for integration tests and won't be executed in production
+    -->
+    <include file="prod/db.changelog-1.0.xml" relativeToChangelogFile="true" />
+    <include file="prod/db.changelog-2.0.xml" relativeToChangelogFile="true" />
+    <include file="prod/db.changelog-3.0.xml" relativeToChangelogFile="true" />
+    <include file="prod/db.changelog-3.3.xml" relativeToChangelogFile="true" />
+    <include file="prod/db.changelog-4.0.xml" relativeToChangelogFile="true" />
+    <include file="prod/db.changelog-5.0.xml" relativeToChangelogFile="true" />
+
+</databaseChangeLog>

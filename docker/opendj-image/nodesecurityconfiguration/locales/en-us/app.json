@@ -1,0 +1,5 @@
+{
+  "title": "Node Security Configuration",
+  "shortInfo": "Node Security Configuration must allow only authorized users to perform ACTIONS on ENM nodes.",
+  "acronym": "NSC"
+}

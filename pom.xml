@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ericsson.nms</groupId>
+        <artifactId>integration</artifactId>
+        <version>15.2.0.40</version>
+    </parent>
+    <groupId>com.ericsson.nms.pres</groupId>
+    <artifactId>Presentation_Server</artifactId>
+    <version>3.66.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Presentation Server</name>
+    <description>
+        Modules providing REST to the Presentation Layer.
+    </description>
+    <organization>
+        <name>Ericsson</name>
+        <url>http://www.ericsson.com</url>
+    </organization>
+    <properties>
+        <!-- Service Framework Versions -->
+        <version.service.framework>4.11.2</version.service.framework>
+
+        <!--
+            Updates our code level to Java 8
+            If a dropback is required for and ISO version which is not using Java 8, comment out this property.
+        -->
+        <target.java.version>1.8</target.java.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+
+        <version.presentationServer.models>1.7.5</version.presentationServer.models>
+
+        <version.metrics>3.0.1</version.metrics>
+
+        <!-- Test Dependencies -->
+        <version.groovy>2.4.10</version.groovy>
+        <version.spock>1.1-groovy-2.4</version.spock>
+        <version.cdi.test.support> 1.1.228</version.cdi.test.support>
+        <version.spock.reports>1.5.0</version.spock.reports>
+
+        <version.jackson>2.14.0</version.jackson>
+        <version.slf4j>1.7.25</version.slf4j>
+        <version.hibernate>5.6.9.Final</version.hibernate>
+        <version.hibernate.validator>6.2.5.Final</version.hibernate.validator>
+
+        <version.lombok>1.18.8</version.lombok>
+
+        <version.javax.annotation.api>1.3.2</version.javax.annotation.api>
+        <version.javax.interceptor.api>1.2</version.javax.interceptor.api>
+
+        <!-- Jboss -->
+        <jboss.http.address>127.0.0.1</jboss.http.address>
+        <jboss.http.port>8080</jboss.http.port>
+        <jboss.management.address>127.0.0.1</jboss.management.address>
+        <jboss.management.port>9990</jboss.management.port>
+        <jboss.username>root</jboss.username>
+        <jboss.password>shroot</jboss.password>
+        <weld.version>3.1.2.Final</weld.version>
+        <cdi.version>2.0</cdi.version>
+
+        <site.url>dav:https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/Presentation_Server</site.url>
+        <versioned.site.dir>${project.build.directory}/site/${project.version}</versioned.site.dir>
+        <latest.site.dir>${project.build.directory}/site/latest</latest.site.dir>
+
+        <!-- Sonar -->
+        <sonar.host.url>https://sonarqube.lmera.ericsson.se</sonar.host.url>
+        <sonar.coverage.exclusions>
+            **/dto/**,
+            **/exceptions/**,
+            **/request/**,
+            **/response/**,
+            **/beans/**,
+            **/ReplicationEnforcer.java,
+            **/cache/CacheFactory.java,
+            **/*Constants.java,
+            **/MainDispatcher.java,
+            **/LoggerProducer.java,
+            **/instrumentation/*,
+            **/listeners/*,
+            **/*Entity.java,
+            **/DateTimeUtil.java
+        </sonar.coverage.exclusions>
+        <sonar.coverage.jacoco.xmlReportPaths>target/coverage-reports/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.issue.ignore.multicriteria>r1,r2</sonar.issue.ignore.multicriteria>
+        <sonar.issue.ignore.multicriteria.r1.ruleKey>squid:MaximumInheritanceDepth</sonar.issue.ignore.multicriteria.r1.ruleKey>
+        <sonar.issue.ignore.multicriteria.r1.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.r1.resourceKey>
+
+        <!-- False Positives -->
+        <sonar.issue.ignore.multicriteria.r2.ruleKey>squid:S3655</sonar.issue.ignore.multicriteria.r2.ruleKey>
+        <sonar.issue.ignore.multicriteria.r2.resourceKey>**/ValidationInterceptor.java</sonar.issue.ignore.multicriteria.r2.resourceKey>
+
+        <sonar.issue.ignore.multicriteria>r1,r2</sonar.issue.ignore.multicriteria>
+        <sonar.issue.ignore.multicriteria.r1.ruleKey>squid:MaximumInheritanceDepth</sonar.issue.ignore.multicriteria.r1.ruleKey>
+        <sonar.issue.ignore.multicriteria.r1.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.r1.resourceKey>
+
+        <!-- False Positives -->
+        <sonar.issue.ignore.multicriteria.r2.ruleKey>squid:S3655</sonar.issue.ignore.multicriteria.r2.ruleKey>
+        <sonar.issue.ignore.multicriteria.r2.resourceKey>**/ValidationInterceptor.java</sonar.issue.ignore.multicriteria.r2.resourceKey>
+
+        <!-- Jacoco -->
+        <jacoco.remote.port>6300</jacoco.remote.port>
+
+        <deltaspike.version>1.9.3</deltaspike.version>
+        <consolidated.jacoco.path>${project.basedir}/../target/jacoco.exec</consolidated.jacoco.path>
+
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax.enterprise</groupId>
+                <artifactId>cdi-api</artifactId>
+                <version>${cdi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${version.javax.annotation.api}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.interceptor</groupId>
+                <artifactId>javax.interceptor-api</artifactId>
+                <version>${version.javax.interceptor.api}</version>
+            </dependency>
+            <!-- Service Framework -->
+            <dependency>
+                <groupId>com.ericsson.oss.itpf.sdk</groupId>
+                <artifactId>ServiceFrameworkJBossBOM</artifactId>
+                <version>${version.service.framework}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Project modules -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>presentation-server-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>presentation-server-jar</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>presentation-server-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>presentation-server-db-schema</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>presentation-server-ejb</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>presentation-server-war</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>presentation-server</artifactId>
+                <version>${project.version}</version>
+                <type>ear</type>
+            </dependency>
+
+            <!-- Instrumentation Dependencies -->
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${version.metrics}</version>
+            </dependency>
+
+            <!-- Deltaspike -->
+            <dependency>
+                <groupId>org.apache.deltaspike.distribution</groupId>
+                <artifactId>distributions-bom</artifactId>
+                <version>${deltaspike.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Groovy -->
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${version.groovy}</version>
+            </dependency>
+
+            <!-- Test Dependencies -->
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-core</artifactId>
+                <version>${version.spock}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib-nodep</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.athaydes</groupId>
+                <artifactId>spock-reports</artifactId>
+                <version>${version.spock.reports}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ericsson.cds</groupId>
+                <artifactId>cdi-test-support</artifactId>
+                <version>${version.cdi.test.support}</version>
+            </dependency>
+
+            <!-- Jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+
+            <!-- Others -->
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>jsr250-api</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+
+            <!-- Hibernate and JPA -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${version.hibernate}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${version.hibernate}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                <version>1.0.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-jcache</artifactId>
+                <version>5.6.10.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${version.hibernate.validator}</version>
+            </dependency>
+
+            <!-- Liquibase -->
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>4.8.0</version>
+            </dependency>
+
+            <!-- Lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+                <scope>provided</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>testsuite</module>
+        <module>presentation-server-api</module>
+        <module>presentation-server-persistence</module>
+        <module>presentation-server-db-schema</module>
+        <module>presentation-server-ejb</module>
+        <module>presentation-server-war</module>
+        <module>presentation-server-ear</module>
+        <module>presentation-server-jar</module>
+        <module>presentation-server-pipeline</module>
+        <module>presentation-server-ci-assembly</module>
+        <module>ERICps_CXP9030203</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>analyze</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>analyze-only</goal>
+                            </goals>
+                            <configuration>
+                                <failOnWarning>false</failOnWarning>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.4</version>
+                    <configuration>
+                        <destFile>${consolidated.jacoco.path}</destFile>
+                        <dataFile>${consolidated.jacoco.path}</dataFile>
+                        <outputDirectory>${project.build.directory}/coverage-reports/jacoco</outputDirectory>
+                        <append>true</append>
+                    </configuration>
+                </plugin>
+
+                <!-- Surefire configuration to use Spock -->
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.0</version>
+                    <configuration>
+                        <!-- disable by default -->
+                        <skip>true</skip>
+                        <useSystemClassLoader>true</useSystemClassLoader>
+                        <useManifestOnlyJar>false</useManifestOnlyJar>
+                        <useFile>false</useFile>
+                        <includes>
+                            <include>**/*Spec.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+    </build>
+
+    <profiles>
+
+        <profile>
+            <id>java8-doclint-disabled</id>
+            <activation>
+              <jdk>[1.8,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>j
+                            <author>false</author>
+                            <failOnError>false</failOnError>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>aggregate</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.6</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.doxia</groupId>
+                                <artifactId>doxia-module-markdown</artifactId>
+                                <version>1.7</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <generateReports>false</generateReports>
+                            <xdocDirectory>src/site/docs</xdocDirectory>
+                            <additionalJOption>-Xdoclint:none</additionalJOption>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>default-site</id>
+                                <phase>none</phase>
+                            </execution>
+                            <execution>
+                                <id>default-deploy</id>
+                                <phase>none</phase>
+                            </execution>
+                            <execution>
+                                <id>generate-versioned-site</id>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>site</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${versioned.site.dir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>generate-latest-site</id>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>site</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${latest.site.dir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>deploy-both-sites</id>
+                                <phase>site-deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <inputDirectory>${project.build.directory}/site</inputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Enable Groovy Compiler -->
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.1</version>
+                        <configuration>
+                            <compilerId>groovy-eclipse-compiler</compilerId>
+                            <fork>true</fork>
+                            <compilerArguments>
+                                <javaAgentClass>lombok.launch.Agent</javaAgentClass>
+                            </compilerArguments>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-eclipse-compiler</artifactId>
+                                <version>2.9.2-01</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-eclipse-batch</artifactId>
+                                <version>2.4.3-01</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${version.lombok}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <distributionManagement>
+                <site>
+                    <id>site</id>
+                    <name>Site</name>
+                    <url>${site.url}</url>
+                </site>
+            </distributionManagement>
+        </profile>
+
+    </profiles>
+
+  <scm>
+    <tag>Presentation_Server-3.58.2</tag>
+  </scm>
+</project>

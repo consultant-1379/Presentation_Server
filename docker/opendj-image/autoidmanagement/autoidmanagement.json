@@ -1,0 +1,17 @@
+{
+  "id": "autoidmanagement",
+  "name": null,
+  "path": "/#autoidmanagement",
+  "protocol": "secure",
+  "type": "web",
+  "version": 4,
+  "resources": [
+    "autocellid_services"
+  ],
+  "groups": [
+    {
+      "id": "Performance_and_Optimization",
+      "name": "Performance_and_Optimization"
+    }
+  ]
+}

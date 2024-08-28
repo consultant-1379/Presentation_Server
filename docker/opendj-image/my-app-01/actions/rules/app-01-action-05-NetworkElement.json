@@ -1,0 +1,12 @@
+{
+  "actionName": "app01-action-05",
+  "condition": {
+    "dataType": "ManagedObject",
+    "properties": [
+      {
+        "name": "moType",
+        "value": "NetworkElement"
+      }
+    ]
+  }
+}

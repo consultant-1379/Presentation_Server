@@ -1,0 +1,12 @@
+{
+  "actionName": "app02-action-03",
+  "condition": {
+    "dataType": "ManagedObject",
+    "properties": [
+      {
+        "name": "moType",
+        "value": "MeContext"
+      }
+    ]
+  }
+}

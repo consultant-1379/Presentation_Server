@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+    <properties>
+        <title>Web Application Application Metadata (network Explorer)</title>
+    </properties>
+    <body>
+        <section name="networkExplorer.json Example">
+            <p>This example shows a simple web application definition.</p>
+                <source><![CDATA[    {
+      "id": "network_explorer",
+      "name": "Network Explorer",
+      "shortInfo": "Use Network Explorer to search and retrieve all Network Configuration Data. The returned data can be grouped into Collections or Saved searches to facilitate sharing and reuse.",
+      "path": "/#networkExplorer",
+      "type": "web",
+      "version": 1,
+      "openInNewWindow": false
+      "resources": [
+        "topologySearchService",
+        "searchExecutor",
+        "topologyCollectionsService",
+        "modelInformationService"
+      ],
+      "groups": [
+        {
+          "id": "Tools",
+          "name": "Tools"
+        }
+      ]
+    }]]>
+                </source>
+        </section>
+    </body>
+</document>

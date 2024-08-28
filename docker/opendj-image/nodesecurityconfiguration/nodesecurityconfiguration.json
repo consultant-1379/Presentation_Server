@@ -1,0 +1,18 @@
+{
+  "id": "nodesecurityconfiguration",
+  "name": null,
+  "path": "#nodesecurityconfiguration",
+  "protocol": "secure",
+  "type": "web",
+  "version": 1,
+  "openInNewWindow": false,
+  "resources": [
+    "oam"
+  ],
+  "groups": [
+    {
+      "id": "Security",
+      "name": "Security"
+    }
+  ]
+}
